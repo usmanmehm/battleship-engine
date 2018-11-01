@@ -1,9 +1,9 @@
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
 describe('PLAYER METHODS', function () {
   describe('validateLocation', function () {
-    var validateLocation = require('../game-logic/player.methods.js').validateLocation;
-    var player;
+    const validateLocation = require('../game-logic/player.methods.js').validateLocation;
+    let player;
 
     beforeEach(function () {
       player = {
@@ -16,22 +16,22 @@ describe('PLAYER METHODS', function () {
     });
 
     it('shoud confirm valid for unoccupied locations in range', function () {
-      var location = [0, 0];
-      var actual = validateLocation(player, location);
+      const location = [0, 0];
+      const actual = validateLocation(player, location);
 
       expect(actual).to.be.ok;
     });
 
     it('shoud confirm INvalid for occupied locations in range', function () {
-      var location = [9, 9];
-      var actual = validateLocation(player, location);
+      const location = [9, 9];
+      const actual = validateLocation(player, location);
 
       expect(actual).to.be.false;
     });
 
     it('shoud confirm INvalid for UNoccupied locations OUT of range', function () {
-      var locationHigh = [10, 10];
-      var locationLow = [-1, -1];
+      const locationHigh = [10, 10];
+      const locationLow = [-1, -1];
 
       expect(validateLocation(player, locationHigh)).to.be.false;
       expect(validateLocation(player, locationLow)).to.be.false;
@@ -39,8 +39,8 @@ describe('PLAYER METHODS', function () {
   });
 
   describe('validateLocations', function () {
-    var validateLocations = require('../game-logic/player.methods.js').validateLocations;
-    var player;
+    const validateLocations = require('../game-logic/player.methods.js').validateLocations;
+    let player;
 
     beforeEach(function () {
       player = {
@@ -53,12 +53,12 @@ describe('PLAYER METHODS', function () {
     });
 
     it('should correctly report a list of unoccupied locations is valid', function () {
-      var locations = [[1, 1], [1, 2], [1, 3], [1, 4]];
+      let locations = [[1, 1], [1, 2], [1, 3], [1, 4]];
       expect(validateLocations(player, locations)).to.be.ok;
     });
 
     it('should correctly report a a problem if any location in the list is invalid', function () {
-      var locations = [[1, 1], [1, 2], [1, 3], [10, 10]];
+      let locations = [[1, 1], [1, 2], [1, 3], [10, 10]];
       expect(validateLocations(player, locations)).to.be.false;
 
       locations = [[1, 1], [1, 2], [1, 3], [0, 0]];
@@ -67,8 +67,8 @@ describe('PLAYER METHODS', function () {
   });
 
   describe('placeShip', function () {
-    var placeShip = require('../game-logic/player.methods.js').placeShip;
-    var player;
+    const placeShip = require('../game-logic/player.methods.js').placeShip;
+    let player;
 
     beforeEach(function () {
       player = {
@@ -86,11 +86,11 @@ describe('PLAYER METHODS', function () {
     });
 
     it('should update a ship with a valid starting location', function () {
-      var ship = player.ships[0];
-      var coordinates = [0, 1];
+      const ship = player.ships[0];
+      const coordinates = [0, 1];
 
       placeShip(player, ship, coordinates, 'horizontal');
-      var actual = ship.locations;
+      const actual = ship.locations;
 
       expect(actual).to.be.ok;
       expect(actual).to.have.length(1);
@@ -98,8 +98,8 @@ describe('PLAYER METHODS', function () {
     });
 
     it('should throw an error if no direction is specified', () => {
-      var ship = player.ships[0];
-      var coordinates = [0, 1];
+      const ship = player.ships[0];
+      const coordinates = [0, 1];
       
       const handler = () => {
         placeShip(player, ship, coordinates);
@@ -113,7 +113,7 @@ describe('PLAYER METHODS', function () {
 
 describe('COMPUTER PLAYER', function () {
   describe('random functions', function () {
-    var randomDirection = require('../game-logic/player.methods').randomDirection;
+    const randomDirection = require('../game-logic/player.methods').randomDirection;
     const randomCoordinates = require('../game-logic/player.methods').randomCoordinates;
     
     it('should generate a pair of random coordinates', function () {
